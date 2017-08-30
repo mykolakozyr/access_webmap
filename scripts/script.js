@@ -23,7 +23,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62c
             '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors | ' +
             'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets'
-});//.addTo(map);
+}).addTo(map);
 
 function highlightFeature(e) {
     var layer = e.target;
@@ -194,5 +194,5 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4734xjt0snd2splhlf0
     maxZoom: 18,
     id: 'mapbox.labels',
     pane: 'labels_pane'
-});//.addTo(map);
+}).addTo(map);
 
