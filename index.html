@@ -5,23 +5,34 @@
     <meta charset=utf-8 />
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
     <title>Administrative Services Time Accessibility</title>
-    <script src='lib/leaflet/leaflet-src.js'></script>
+    <!-- Leaflet -->
     <script src='lib/leaflet/leaflet.js'></script>
-    <script src="lib/leaflet/leaflet-side-by-side.js"></script>
     <link href='lib/leaflet/leaflet.css' rel='stylesheet' />
+    <!-- Leaflet Plugins -->
+    <script src="lib/leaflet/leaflet-side-by-side.js"></script>
+    <script src="lib/leaflet/leaflet-dvf.js"></script>
+    <link rel="stylesheet" href="lib/leaflet/leaflet.groupedlayercontrol.css" />
+    <script src="lib/leaflet/leaflet.groupedlayercontrol.js"></script>    
+    <!-- J-QUERY -->
     <link href="lib/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
     <script src='lib/jquery.min.js'></script>
     <script src="lib/jquery-ui.min.js"></script>
+    <!-- Data -->
     <script src="data/otg.geojson" ></script>
+    <script src="data/cnap_data.geojson" ></script>
+    <!-- Style -->
     <link rel="stylesheet" type="text/css" href="custom.css">
+    
 </head>
-
 <body>
     <div id='map'></div>
-
-    <script src="scripts/script.js"></script>
     
-    <!-- Add Google Analytics -->
+    <script src="scripts/script.js"></script>
+    <script src="scripts/group.js"></script>
+    <script src="scripts/percent_chart.js"></script>
+    <script src="scripts/map_zoom.js"></script>
+    
+    <!-- Google Analytics -->
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

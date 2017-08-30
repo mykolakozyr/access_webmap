@@ -7,7 +7,7 @@ bounds = L.latLngBounds(southWest, northEast);
 map.setView([49.03, 31.50],6);
 map.setMaxBounds(bounds);
 map.setMinZoom(5);
-map.setMaxZoom(10);
+map.setMaxZoom(11);
 
 // create pane for showing labels on top the geojson file
 map.createPane('labels_pane')
@@ -23,18 +23,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62c
             '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors | ' +
             'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets'
-}).addTo(map);
-
-//add access real layer
-var ar_layer = L.tileLayer('data/ar_3857/{z}/{x}/{y}.png', {
-    minZoom: 5,
-    tms: true,
-}).addTo(map);
-//add access expert layer
-var ae_layer = L.tileLayer('data/ae_3857/{z}/{x}/{y}.png', {
-    minZoom: 5,
-    tms: true,
-}).addTo(map)
+});//.addTo(map);
 
 function highlightFeature(e) {
     var layer = e.target;
@@ -46,9 +35,9 @@ function highlightFeature(e) {
         fillOpacity: 0.5
     });
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
+    // if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    //     layer.bringToFront();
+    // }
 
     info.update(layer.feature.properties);
 }
@@ -64,29 +53,37 @@ function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
 
-function regStyle(feature){
-    return {
-        fillColor: 'blue',
-        weight: 1,
-        fillOpacity: 0.3,
-        color: 'white',
-        dashArray: 3,
-        opacity: 0.8,
-    }
-};
-
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: zoomToFeature
     });
-}        
-
+};
+var regStyle = {
+    radius: 8,
+    fillColor: "blue",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.3   
+};
 otgLayer = L.geoJson(otg, {
     style: regStyle,
     onEachFeature: onEachFeature
 }).addTo(map);
+
+
+//add access real layer
+var ar_layer = L.tileLayer('data/ar_3857/{z}/{x}/{y}.png', {
+    minZoom: 5,
+    // tms: true,
+}).addTo(map);
+//add access expert layer
+var ae_layer = L.tileLayer('data/ae_3857/{z}/{x}/{y}.png', {
+    minZoom: 5,
+    // tms: true,
+}).addTo(map)
 
 // control that shows amalgamated community info on hover
 var info = L.control();
@@ -127,7 +124,7 @@ legend_ae.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [10, 20, 30],
-        labels = ['<strong> Time Accessibility. Proposals</strong>'],
+        labels = ['<strong> Time Accessibility. Proposals</strong><br>&nbsp<IMG STYLE="border: 5;" width=10 SRC="data/asc.png">&nbsp&nbsp&nbspProposed ASC'],
         data_list = [' - 29kk p. (74,1%), + 5,5%', ' - 36,1kk p. (92,4%), + 6,4%', '  - 38,6kk p. (98,8%), + 1,8%'],
         from, to;
 
@@ -193,15 +190,9 @@ $(document).ready(function () {
     L.control.sideBySide(ar_layer, ae_layer).addTo(map)
 })
 
-// switching on and off OTGlayer
-var overlay = {
-    "Amalgamated Community": otgLayer
-};
-layerControl = L.control.layers(null, overlay, {position: 'topleft'});
-layerControl.addTo(map);
-
 L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4734xjt0snd2splhlf0z4c8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
     maxZoom: 18,
     id: 'mapbox.labels',
     pane: 'labels_pane'
-}).addTo(map);
+});//.addTo(map);
+
